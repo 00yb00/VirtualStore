@@ -1,29 +1,37 @@
-using Dapr.Client;
+using Google.Api;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using VirtualStore.Accessor.Models;
+using VirtualStore.Accessor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-// Add services to the container.
+builder.Services.AddControllers().AddDapr();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Bind appsettings configuration for DB
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ProductsService>();
 
 var app = builder.Build();
 
-app.MapDefaultEndpoints();
-
-// Configure the HTTP request pipeline.
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
-app.MapPost("/process-product", async (ProductRequest request) =>
-{
-    await processProductAsync(request);
-    return Results.Ok($"product id:{request.id} confirm: #{Guid.NewGuid().ToString()[..8]}");
-});
+app.UseAuthorization();
+
+
+app.MapControllers();
+
 app.Run();
-//Process time
-async Task processProductAsync(ProductRequest request)
-{
-    await Task.Delay(100);
-}
-//process object type
-public record ProductRequest(string name, string id, List<string> items);
+

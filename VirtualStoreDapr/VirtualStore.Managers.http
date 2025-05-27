@@ -1,4 +1,4 @@
-@VirtualStoreDapr_HostAddress = http://localhost:5213
+@VirtualStore.Managers_HostAddress = http://localhost:5213
 
 Post{{VirtualStore.Managers_HostAddress}}/create-product/
 Accept: application/json
