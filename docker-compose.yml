@@ -1,0 +1,65 @@
+
+
+services:
+  accessor:
+    build:
+      context: ./VirtualStore.Accessor
+    container_name: accessor
+    ports:
+      - "5000:80"
+    networks:
+      - virtualstore
+
+  accessor-dapr:
+    image: "daprio/daprd:latest"
+    container_name: accessor-dapr
+    command: [
+      "./daprd",
+      "-app-id", "accessor",
+      "-app-port", "80",
+      "-components-path", "/components",
+      "-dapr-http-port", "3500"
+    ]
+    volumes:
+      - "./components/:/components"
+    depends_on:
+      - accessor
+    network_mode: "service:accessor"
+
+  managers:
+    build:
+      context: ./VirtualStore.Managers
+    container_name: managers
+    ports:
+      - "5001:80"
+    networks:
+      - virtualstore
+
+  managers-dapr:
+    image: "daprio/daprd:latest"
+    container_name: managers-dapr
+    command: [
+      "./daprd",
+      "-app-id", "managers",
+      "-app-port", "80",
+      "-components-path", "/components",
+      "-dapr-http-port", "3501"
+    ]
+    volumes:
+      - "./components/:/components"
+    depends_on:
+      - managers
+    network_mode: "service:managers"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - virtualstore
+
+networks:
+  virtualstore:
+    driver: bridge

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36121.58 d17.14
+VisualStudioVersion = 17.14.36121.58
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualStore.Managers", "VirtualStoreDapr\VirtualStore.Managers.csproj", "{8C9A6E49-E4E9-CD54-067E-3CBEBC2BA2DA}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualStore.ServiceDefaults", "VirtualStore.ServiceDefaults\VirtualStore.ServiceDefaults.csproj", "{30DF6435-628C-291B-7009-72D08F74E933}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualStore.Accessor", "VirtualStore.Accessor\VirtualStore.Accessor.csproj", "{DE73DCC3-BFC1-CF35-D068-1378CA1595DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualStore.Docker", "VirtualStore.Docker\VirtualStore.Docker.csproj", "{BEAFDA5F-30DC-F4EB-B363-6DF1D2840F22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DE73DCC3-BFC1-CF35-D068-1378CA1595DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE73DCC3-BFC1-CF35-D068-1378CA1595DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE73DCC3-BFC1-CF35-D068-1378CA1595DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEAFDA5F-30DC-F4EB-B363-6DF1D2840F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEAFDA5F-30DC-F4EB-B363-6DF1D2840F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEAFDA5F-30DC-F4EB-B363-6DF1D2840F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEAFDA5F-30DC-F4EB-B363-6DF1D2840F22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
