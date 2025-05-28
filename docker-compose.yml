@@ -1,12 +1,17 @@
 
-
 services:
   accessor:
     build:
-      context: ./VirtualStore.Accessor
+      context: .
+      dockerfile: VirtualStore.Accessor/Dockerfile
     container_name: accessor
     ports:
       - "5000:80"
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=Northwind;User Id=sa;Password=MyN3wP@ssword;
+    depends_on:
+      - sqlserver
     networks:
       - virtualstore
 
@@ -28,10 +33,15 @@ services:
 
   managers:
     build:
-      context: ./VirtualStore.Managers
+      context: .
+      dockerfile: VirtualStore.Managers/Dockerfile
     container_name: managers
     ports:
       - "5001:80"
+    environment:
+     - ASPNETCORE_URLS=http://+:80
+    depends_on:
+      - sqlserver
     networks:
       - virtualstore
 
@@ -51,6 +61,18 @@ services:
       - managers
     network_mode: "service:managers"
 
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      MSSQL_SA_PASSWORD: "MyN3wP@ssword"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+    networks:
+      - virtualstore
+
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -63,3 +85,6 @@ services:
 networks:
   virtualstore:
     driver: bridge
+
+volumes:
+  sqlserverdata:

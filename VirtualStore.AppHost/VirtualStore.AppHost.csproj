@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VirtualStore.Accessor\VirtualStore.Accessor.csproj" />
-    <ProjectReference Include="..\VirtualStoreDapr\VirtualStore.Managers.csproj" />
+    <ProjectReference Include="..\VirtualStore.Managers\VirtualStore.Managers.csproj" />
   </ItemGroup>
 
 </Project>

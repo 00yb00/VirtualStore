@@ -1,6 +1,0 @@
-@VirtualStore.Managers_HostAddress = http://localhost:5213
-
-Post{{VirtualStore.Managers_HostAddress}}/create-product/
-Accept: application/json
-Content-Type: application/json{ "name":"wine","id":"1","items":["1","2","3"]}
-###
